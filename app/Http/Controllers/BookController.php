@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\StoreBookRequest;
+use Illuminate\Http\Request;
+use App\Models\book;
+
+class BookController extends Controller
+{
+    // public function create()
+    // {
+    //     return view('books.create');
+    // }
+
+    // public function store(StoreBookRequest $request)
+    // {
+    //     $validated = $request->validated();
+
+    //     // Cetak data inputan
+    //     dump($validated);
+
+    //     // Atau bisa juga dengan:
+    //     // echo '<pre>' . print_r($validated, true) . '</pre>';
+    // }
+    public function create(Request $request)
+    {
+        
+        // Buat ID acak
+        $id = mt_rand(1000000000000000, 9999999999999999);
+    
+        // Siapkan data untuk dimasukkan ke dalam database
+        $data = [
+            'buku_id' => $id,
+            'buku_penulis_id' => $request['buku_penulis_id'],
+            'buku_penerbit_id' => $request['buku_penerbit_id'],
+            'buku_kategori_id' => $request['buku_kategori_id'],
+            'buku_judul' => $request['buku_judul'],
+            'buku_isbn' => $request['buku_isbn'],
+            'buku_thnterbit' => $request['buku_thnterbit'], // Spasi sudah dihapus
+            'buku_rak_id' => $request['buku_rak_id'],
+        ];
+    
+        // Simpan data ke database
+        book::create($data);
+    
+        // Redirect setelah berhasil menyimpan
+        return redirect()->route('buku')->with('success', 'Data buku berhasil ditambahkan!');
+    }    
+
+    public function create_buku() {
+        // Logika untuk menampilkan form pembuatan penerbit
+        return view('create_buku'); // Misalkan ada file view untuk form ini
+    }
+    
+    public function update (Request $request, $id)
+    {
+        $data = [
+            'buku_penulis_id' => $request->input('buku_penulis_id'),
+            'buku_penerbit_id' => $request->input('buku_penerbit_id'),
+            'buku_kategori_id' => $request->input('buku_kategori_id'),
+            'buku_judul' => $request->input('buku_judul'),
+            'buku_isbn' => $request->input('buku_isbn'),
+            'buku_thnterbit' => $request->input('buku_thnterbit'),
+            'buku_rak_id' => $request->input('buku_rak_id'),
+        ];
+        
+        book::updateBuku($id, $data);
+    
+        return redirect()->route('buku')->with('success', 'Data Buku berhasil diupdate!');
+    }
+
+    public function delete ($id)
+    {
+        book::deleteBuku($id);
+    
+        return redirect()->route('buku')->with('deleted', 'Data penerbit berhasil dihapus!');
+    }
+
+    
+}
