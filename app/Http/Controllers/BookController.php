@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBookRequest;
 use Illuminate\Http\Request;
 use App\Models\book;
+use App\Models\peminjaman;
+use App\Models\peminjaman_detail;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -43,6 +46,11 @@ class BookController extends Controller
     
         // Simpan data ke database
         book::create($data);
+        
+        //Kasih gambar yang diinginkan
+        if($request->hasFile('buku_urlgambar')){
+            book::uploadGambarBuku($id, $request->file('buku_urlgambar'));
+        }
     
         // Redirect setelah berhasil menyimpan
         return redirect()->route('buku')->with('success', 'Data buku berhasil ditambahkan!');
@@ -72,10 +80,22 @@ class BookController extends Controller
 
     public function delete ($id)
     {
-        book::deleteBuku($id);
-    
-        return redirect()->route('buku')->with('deleted', 'Data penerbit berhasil dihapus!');
-    }
-
-    
+        $buku = book::find($id);
+        $peminjaman_detail = peminjaman_detail::where('peminjaman_detail_buku_id', $id)->get();
+        
+        foreach ($peminjaman_detail as $peminjaman_detaili) {
+        $peminjaman = peminjaman:: find($peminjaman_detaili)->first();
+        $peminjaman->delete();
 }
+        Storage::disk('public')->delete($buku->buku_urlgambar);
+        book::deleteBuku($id);
+        return redirect()->route('buku')->with('success', 'Data peminjaman berhasil dihapus!');
+
+}
+}
+
+// $peminjaman_detail = peminjaman_detail::where('peminjaman_detail_buku_id', $id)->get();
+
+// foreach ($peminjaman_detail as $peminjaman_detaili) {
+//     $peminjaman = peminjaman:: find($peminjaman_detaili)->first();
+//     $peminjaman->delete();

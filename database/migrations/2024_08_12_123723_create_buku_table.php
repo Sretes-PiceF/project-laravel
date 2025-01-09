@@ -21,7 +21,7 @@ return new class extends Migration
             $table->char('buku_isbn', 16)->nullable(false);   
             $table->date('buku_thnterbit', 4)->nullable(false);
             $table->string('buku_rak_id', 16)->nullable(false);
-            // $table->string('buku_urlgambar', 16)->nullable(false);
+            $table->string('buku_urlgambar')->nullable();
             // Create Foreign Key
             $table->foreign('buku_penulis_id')->references('penulis_id')->on('penulis')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('buku_rak_id')->references('rak_id')->on('rak')->onDelete('cascade')->onUpdate('cascade');

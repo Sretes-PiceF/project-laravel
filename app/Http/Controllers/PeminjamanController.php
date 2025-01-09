@@ -65,7 +65,8 @@ class PeminjamanController extends Controller
     {
         peminjaman_detail::where('peminjaman_detail_peminjaman_id', $id)->delete();
         peminjaman::find($id)->delete();
-        return redirect()->route('admin.peminjaman')->with('deleted', 'Data peminjaman berhasil dihapus!');
+
+        return redirect()->route('admin.peminjaman')->with('success', 'Data peminjaman berhasil dihapus!');
     }
 
 

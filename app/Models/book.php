@@ -77,4 +77,11 @@ protected static function deleteBuku ($id)
 {
     return self::destroy($id);
 }
+
+protected static function uploadGambarBuku($id, $file){
+    $buku = self::find ($id);
+    $path = $file -> store('buku_pictures', 'public');
+    $buku->buku_urlgambar = $path;
+    $buku->save();
+}
 }

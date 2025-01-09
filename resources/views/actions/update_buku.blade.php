@@ -67,6 +67,10 @@
                         <label for="buku_thnterbit" class="form-label">Tahun Terbit</label>
                         <input value="{{ $buku->buku_isbn }}" type="date" name="buku_thnterbit" id="buku_thnterbit" class="form-control" placeholder="Masukkan Tahun Terbit">
                     </div>
+                    {{-- <div class="form-group col-12 col-md-6 col-lg-4">
+                        <label for="buku_urlgambar" class="form-label">Massukkan Gambar</label>
+                        <input type="file" name="buku_urlgambar" id="buku_urlgambar" class="form-control">
+                    </div> --}}
                     <div class="form-group col-12 col-md-6 col-lg-4">
                         <button class="btn btn-success" type="submit">Tambahkan</button>
                     </div>

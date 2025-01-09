@@ -19,6 +19,11 @@ class peminjaman_detail extends Model
         'peminjaman_detail_buku_id',
     ];
 
+    public function peminjaman()
+{
+    return $this->belongsTo(Peminjaman::class, 'peminjaman_detail_peminjaman_id');
+}
+
     // protected $keyType = 'string';
 
     // protected static function readPeminjaman_detail()
