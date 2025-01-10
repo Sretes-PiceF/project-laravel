@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class book extends Model
 {
@@ -75,6 +76,21 @@ class book extends Model
 
 protected static function deleteBuku ($id)
 {
+    $buku = book::find($id);
+        $peminjaman_detail = peminjaman_detail::where('peminjaman_detail_buku_id', $id)->get();
+        
+        if($peminjaman_detail){
+            foreach ($peminjaman_detail as $peminjaman_detaili) {
+                $peminjaman = peminjaman:: find($peminjaman_detaili)->first();
+                $peminjaman->delete();
+                }
+        }
+
+
+        if($buku->buku_urlgambar){
+            Storage::disk('public')->delete($buku->buku_urlgambar);
+        }
+
     return self::destroy($id);
 }
 

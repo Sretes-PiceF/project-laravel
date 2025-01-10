@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\book;
 use Illuminate\Http\Request;
 
 use App\Models\Penerbit;
@@ -57,6 +58,14 @@ public function update (Request $request, $id)
 }
 public function delete ($id)
 {
+    $buku = book::where('buku_penerbit_id', $id)->get();
+
+    if($buku){
+        foreach ($buku as $bukus){
+            book::deleteBuku($bukus->buku_id);
+        }
+    }
+
     Penerbit::deletePenerbit($id);
 
     return redirect()->route('penerbit')->with('deleted', 'Data penerbit berhasil dihapus!');

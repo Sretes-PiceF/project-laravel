@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\book;
 use App\Models\rak;
 use Illuminate\Http\Request;
 
@@ -47,6 +48,13 @@ public function update (Request $request, $id)
 
 public function delete ($id)
 {
+    $buku = book::where('buku_rak_id', $id)->get();
+
+    if($buku){
+        foreach ($buku as $bukus){
+            book::deleteBuku($bukus->buku_id);
+        }
+    }
     rak::deleteRak($id);
 
     return redirect()->route('admin.rak')->with('deleted', 'Data rak berhasil dihapus!');

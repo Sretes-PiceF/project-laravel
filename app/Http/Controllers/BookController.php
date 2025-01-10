@@ -79,15 +79,7 @@ class BookController extends Controller
     }
 
     public function delete ($id)
-    {
-        $buku = book::find($id);
-        $peminjaman_detail = peminjaman_detail::where('peminjaman_detail_buku_id', $id)->get();
-        
-        foreach ($peminjaman_detail as $peminjaman_detaili) {
-        $peminjaman = peminjaman:: find($peminjaman_detaili)->first();
-        $peminjaman->delete();
-}
-        Storage::disk('public')->delete($buku->buku_urlgambar);
+    {   
         book::deleteBuku($id);
         return redirect()->route('buku')->with('success', 'Data peminjaman berhasil dihapus!');
 

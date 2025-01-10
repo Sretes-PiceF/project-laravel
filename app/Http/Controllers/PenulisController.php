@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\book;
 use App\Models\penulis;
 use Illuminate\Http\Request;
 
@@ -47,6 +48,14 @@ public function update (Request $request, $id)
 
 public function delete ($id)
 {
+    $buku = book::where('buku_penulis_id', $id)->get();
+
+    if($buku){
+        foreach ($buku as $bukus){
+            book::deleteBuku($bukus->buku_id);
+        }
+    }
+
     penulis::deletePenulis($id);
 
     return redirect()->route('admin.penulis')->with('deleted', 'Data penulis berhasil dihapus!');
