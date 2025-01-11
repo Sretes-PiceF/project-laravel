@@ -73,15 +73,33 @@
                                 <td>{{ $peminjaman->peminjaman_denda }}</td>
                                 {{-- <td>{{ $peminjaman->user_id }}</td> --}}
                                 <td>
+                                    <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#hapusModal{{ $peminjaman->peminjaman_id }}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
 
-                                    <!-- Form Hapus dengan Metode DELETE -->
-                                    <form action="{{ route('peminjaman.delete', ['id' => $peminjaman->peminjaman_id]) }}" method="POST" style="display:inline-block;">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
+                                    <!-- Modal Hapus -->
+                                    <div class="modal fade" id="hapusModal{{ $peminjaman->peminjaman_id }}" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5">Peringatan!!!</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Apakah anda yakin ingin menghapus data ini?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                                    <!-- Form Hapus dengan Metode DELETE -->
+                                                    <form action="{{ route('peminjaman.delete', ['id' => $peminjaman->peminjaman_id]) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                                 @endif
                             </tr>

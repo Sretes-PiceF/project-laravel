@@ -59,18 +59,41 @@
                                 <td>{{ $bukus->buku_thnterbit }}</td>
                                 <td>
                                     <!-- Tombol Edit -->
-                                    <a href="{{ route('update_buku', ['id' => $bukus->buku_id]) }}">
-                                        <button class="btn btn-warning"><i class="fas fa-pencil"></i></button>
-                                    </a>
+    <!-- Tombol Edit -->
+    <a href="{{ route('update_buku', ['id' => $bukus->buku_id]) }}" class="btn btn-warning">
+        <i class="fas fa-pencil"></i>
+    </a>
 
+    <!-- Tombol Hapus -->
+    <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#hapusModal">
+        <i class="fas fa-trash"></i>
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="hapusModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Peringatan!!!</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Apakah anda sudah yakin ingin menghapus data ini?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>                                
                                     <!-- Form Hapus dengan Metode DELETE -->
-                                    <form action="{{ route('buku.delete', ['id' => $bukus->buku_id]) }}" method="POST" style="display:inline-block;">
+                                    <form action="{{ route('buku.delete', ['id' => $bukus->buku_id]) }}" method="POST" >
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                                            <i class="fas fa-trash"></i>
+                                        <button type="submit" class="btn btn-danger" >
+                                            Hapus
                                         </button>
                                     </form>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
                                 </td>
                             </tr>
                             @endforeach
