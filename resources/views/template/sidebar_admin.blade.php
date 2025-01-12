@@ -31,10 +31,10 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-hand"></i></div>
                     Peminjaman
                 </a>
-                <a class="nav-link" href="{{ route ('OpsiAdmin') }}">
+                {{-- <a class="nav-link" href="{{ route ('OpsiAdmin') }}">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-bell"></i></div>
                     Opsi Pengembang
-                </a>
+                </a> --}}
                 <a class="nav-link" href="{{ route ('settingAdmin') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-gear"></i></div>
                     Pengaturan

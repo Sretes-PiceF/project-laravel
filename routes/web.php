@@ -96,12 +96,21 @@ Route::get('/siswaaa', [DashboardController::class, 'dashboardSiswa'])->name('da
 Route::get('/bukuSiswa', [BukuController::class, 'bukuSiswa'])->name('bukuSiswa');
 Route::get('/peminjamanSiswa', [PeminjamanController::class, 'peminjamanSiswa'])->name('peminjamanSiswa');
 Route::get('/pinjam/{id}', [PeminjamanController::class, 'create'])->name('action.pinjam-buku');
-Route::get('/pengaturan', [PengaturanController::class, 'setting'])->name('setting');
-Route::get('/settingAdmin', [PengaturanController::class, 'settingAdmin'])->name('settingAdmin');
 Route::get('/opsi_pengembang_siswa', [PagesController::class, 'Opsi'])->name('Opsi');
+
+
+//pengaturan siswa dan admin
+//pengaturan siswa
+Route::get('/pengaturan', [PengaturanController::class, 'setting'])->name('setting');
+Route::put('/pengaturan', [UserController::class, 'updateProfile'])->name('action.updateprofile');
+
 
 //MIDDLEWARE KHUSUS ADMIN ROUTE
 Route::middleware(RoleMiddleware::class)->group(function(){
+
+    //pengaturan admin
+Route::get('/settingAdmin', [PengaturanController::class, 'settingAdmin'])->name('settingAdmin');
+Route::patch('/settingAdmin', [UserController::class, 'updateProfile'])->name('action.update-Profile');
 
 //KHUSUS JALUR ADMIN
 Route::get('/admin', [DashboardController::class, 'dashboardAdmin'])->name('dashboardAdmin');

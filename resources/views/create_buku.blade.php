@@ -1,6 +1,6 @@
 @extends('template.layout')
 
-@section('title', 'Halaman Create Penerbit')
+@section('title', 'Halaman Create Buku')
 
 @section('header')
     @include('template.navbar_admin')

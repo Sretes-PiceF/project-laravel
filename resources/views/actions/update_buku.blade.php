@@ -1,6 +1,6 @@
 @extends('template.layout')
 
-@section('title', 'Halaman Create Penerbit')
+@section('title', 'Halaman Update Buku')
 
 @section('header')
     @include('template.navbar_admin')
@@ -12,11 +12,11 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Penerbit</h1>
+                <h1 class="mt-4">Update Buku</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">Halaman Update Data Buku</li>
                 </ol>
-                <form action="{{ route('buku.update', ['id' => $buku->buku_id]) }}" class="row my-4 gap-3" method="post">
+                <form action="{{ route('buku.update', ['id' => $buku->buku_id]) }}" class="row my-4 gap-3" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
                     <div class="form-group col-12 col-md-6 col-lg-4">
@@ -65,12 +65,12 @@
                     </div>                 
                     <div class="form-group col-12 col-md-6 col-lg-4">
                         <label for="buku_thnterbit" class="form-label">Tahun Terbit</label>
-                        <input value="{{ $buku->buku_isbn }}" type="date" name="buku_thnterbit" id="buku_thnterbit" class="form-control" placeholder="Masukkan Tahun Terbit">
+                        <input value="{{ $buku->buku_thnterbit }}" type="date" name="buku_thnterbit" id="buku_thnterbit" class="form-control" placeholder="Masukkan Tahun Terbit">
                     </div>
-                    {{-- <div class="form-group col-12 col-md-6 col-lg-4">
+                    <div class="form-group col-12 col-md-6 col-lg-4">
                         <label for="buku_urlgambar" class="form-label">Massukkan Gambar</label>
-                        <input type="file" name="buku_urlgambar" id="buku_urlgambar" class="form-control">
-                    </div> --}}
+                        <input valu="{{ $buku->buku_urlgambar }}" type="file" name="buku_urlgambar" id="buku_urlgambar" class="form-control">
+                    </div>
                     <div class="form-group col-12 col-md-6 col-lg-4">
                         <button class="btn btn-success" type="submit">Tambahkan</button>
                     </div>

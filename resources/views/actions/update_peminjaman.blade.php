@@ -1,6 +1,6 @@
 @extends('template.layout')
 
-@section('title', 'Halaman Update Penerbit')
+@section('title', 'Halaman Update Peminjaman')
 
 @section('header')
     @include('template.navbar_admin')
@@ -12,9 +12,9 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Penerbit</h1>
+                <h1 class="mt-4">Peminjaman</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Halaman Update Data Penerbit</li>
+                    <li class="breadcrumb-item active">Halaman Update Data Peminjaman</li>
                 </ol>
                 <form action="{{ route('peminjaman.update', ['id' => $peminjaman->peminjaman_id]) }}" class="row my-4 gap-3" method="post">
                     @csrf

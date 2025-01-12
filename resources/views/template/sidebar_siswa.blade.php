@@ -19,10 +19,10 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-gear"></i></div>
                     Pengaturan
                 </a>
-                <a class="nav-link" href="{{ route ('Opsi') }}">
+                {{-- <a class="nav-link" href="{{ route ('Opsi') }}">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-bell"></i></div>
                     Opsi Pengembang
-                </a>
+                </a> --}}
                 <a class="nav-link" href="{{ route ('action.logout') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-right-from-bracket"></i></div>
                     Logout

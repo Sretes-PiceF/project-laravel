@@ -142,6 +142,37 @@ public function login(Request $request)
     //     }
     // }
 }
+public function updateProfile (Request $request){
+    $user = Auth::user();
+    $user_database = User::where("user_id", $user->user_id)->first();
+    
+    if ($request->input('user_password')) {
+        $data = [
+            'user_nama' => $request->input('user_nama'),
+            'user_alamat' => $request->input('user_alamat'),
+            'user_username' => $request->input('user_username'),
+            'user_email' => $request->input('user_email'),
+            'user_notelp' => $request->input('user_notelp'),
+            'user_password' => bcrypt($request->input('user_password')),
+        ];
+
+        $user_database->update($data);
+    } else{
+        $data = [
+            'user_nama' => $request->input('user_nama'),
+            'user_alamat' => $request->input('user_alamat'),
+            'user_username' => $request->input('user_username'),
+            'user_email' => $request->input('user_email'),
+            'user_notelp' => $request->input('user_notelp'),
+            'user_password' => bcrypt($request->input('user_password')),
+        ];
+
+        $user_database->update($data);
+    } if($user->user_level == 'admin') {
+        return redirect()->route('settingAdmin')->with('success', 'Profile berhasil di update!');
+    }
+    return redirect()->route('setting')->with('success', 'Profile berhasil di update!');
+}
 
 public function logout (){
     Auth::logout();

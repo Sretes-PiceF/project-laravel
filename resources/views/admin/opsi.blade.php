@@ -1,6 +1,6 @@
-@extends('template.layout')
+{{-- @extends('template.layout')
 
-@section('title', 'Dashboard - Siswa Perpustakaan')
+@section('title', 'Dashboard - Admin Perpustakaan')
 
 @section('header')
     @include('template.navbar_admin')
@@ -31,10 +31,10 @@
     color: #333;
 }
 
-.card img {
-    width: 100px; /* Perbesar ukuran gambar */
-    height: 100px; /* Sesuaikan dengan lebar */
-    border-radius: 50%; /* Agar tetap melingkar */
+img {
+    width: 1000px; /* Perbesar ukuran gambar */
+    height: 1000px; /* Sesuaikan dengan lebar */
+    border-radius: 1000%; /* Agar tetap melingkar */
     object-fit: cover; /* Agar gambar memenuhi kotak tanpa distorsi */
     margin-bottom: 15px;
 }
@@ -81,6 +81,8 @@
 .card .btn-follow:hover {
     background: #0056b3;
 }
+
+
 </style>
 
 <div id="layoutSidenav">
@@ -110,4 +112,4 @@
         </footer>
     </div>
 </div>
-@endsection
+@endsection --}}

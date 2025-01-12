@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\book;
 use App\Models\peminjaman;
 use App\Models\peminjaman_detail;
+use Illuminate\Session\Store;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
@@ -28,8 +30,8 @@ class BookController extends Controller
     // }
     public function create(Request $request)
     {
-        
-        // Buat ID acak
+        try{
+            // Buat ID acak
         $id = mt_rand(1000000000000000, 9999999999999999);
     
         // Siapkan data untuk dimasukkan ke dalam database
@@ -54,6 +56,12 @@ class BookController extends Controller
     
         // Redirect setelah berhasil menyimpan
         return redirect()->route('buku')->with('success', 'Data buku berhasil ditambahkan!');
+        } 
+        catch(\Exception $e){
+            Log::error($e->getMessage());
+            return redirect()->route('buku')->with('error', "Gagal membuat buku " . $e->getMessage());
+        }
+        
     }    
 
     public function create_buku() {
@@ -74,6 +82,15 @@ class BookController extends Controller
         ];
         
         book::updateBuku($id, $data);
+
+        $buku = book::find($id);
+        //Kasih gambar yang diinginkan
+        if($request->hasFile('buku_urlgambar')){
+            if($buku->buku_urlgambar){
+                Storage::disk("public")->delete($buku->buku_urlgambar);
+            }
+            book::uploadGambarBuku($id, $request->file('buku_urlgambar'));
+        }
     
         return redirect()->route('buku')->with('success', 'Data Buku berhasil diupdate!');
     }
